@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-14T15:14:30+09:00",
+ "generated_at": "2026-09-14T15:16:33+09:00",
  "hotels": {
   "ginzanso": {
    "errors": [],
@@ -245,7 +245,7 @@
    "cells": {
     "2027-02-10": {
      "2": "※",
-     "4": "※"
+     "4": "—"
     },
     "2027-02-11": {
      "2": "※",
@@ -259,7 +259,7 @@
    "status": "closed",
    "status_note": "各房型有庫存但尚未受理（受付開始 2026/12/1）；官網公告販售至 02/11",
    "liberty_lines": [
-    "02/10：川側・和室８畳（2–3人） 在庫3、山側・和室１２畳（2–4人） 在庫1、川側・和室６畳　屋内ベラ（2–2人） 在庫2、デラックスツイン（2–2人） 在庫2、シングルルーム（1–1人） 在庫3",
+    "02/10：川側・和室８畳（2–3人） 在庫3、川側・和室６畳　屋内ベラ（2–2人） 在庫2、デラックスツイン（2–2人） 在庫2、シングルルーム（1–1人） 在庫3",
     "02/11：川側・和室８畳（2–3人） 在庫2、山側・和室１２畳（2–4人） 在庫2、川側・和室６畳　屋内ベラ（2–2人） 在庫2、デラックスツイン（2–2人） 在庫2、シングルルーム（1–1人） 在庫2",
     "02/12：系統尚無此日資料（未開賣）"
    ],
@@ -279,20 +279,6 @@
        "cap_max": 3,
        "reception_start": 20261201,
        "remain": 3,
-       "available": false,
-       "room_available": true,
-       "accept": true,
-       "price": null
-      },
-      {
-       "plan_id": 85679,
-       "plan": "◆オフィシャル事前決済【旬旅♪】白銀の温泉街と大正ロマン♪季節を味わう冬の恵み会席☆[禁煙]☆［1泊2食付］",
-       "room_id": 605,
-       "room": "山側・和室１２畳（一部フローリングあり）",
-       "cap_min": 2,
-       "cap_max": 4,
-       "reception_start": 20261201,
-       "remain": 1,
        "available": false,
        "room_available": true,
        "accept": true,
@@ -349,20 +335,6 @@
        "cap_max": 3,
        "reception_start": 20250918,
        "remain": 3,
-       "available": false,
-       "room_available": false,
-       "accept": true,
-       "price": null
-      },
-      {
-       "plan_id": 829,
-       "plan": "◆【旬旅♪】季節を味わう旬の恵み会席♪大正ロマン漂う街へ…☆[禁煙]☆［1泊2食付］",
-       "room_id": 605,
-       "room": "山側・和室１２畳（一部フローリングあり）",
-       "cap_min": 2,
-       "cap_max": 4,
-       "reception_start": 20250918,
-       "remain": 1,
        "available": false,
        "room_available": false,
        "accept": true,
