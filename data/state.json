@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-12T22:00:59+09:00",
+ "generated_at": "2026-09-14T14:34:46+09:00",
  "hotels": {
   "ginzanso": {
    "errors": [],
@@ -18,7 +18,7 @@
     }
    },
    "status": "unknown",
-   "status_note": "無法判斷（目標日皆 ×；3–5 月有 14 天 ※，疑為休館日而非預約邊界）",
+   "status_note": "無法判斷（目標日皆 ×；3–5 月有 13 天 ※，疑為休館日而非預約邊界）",
    "closed_boundary": null,
    "horizon_last_open": null,
    "horizon_summary": [
@@ -31,8 +31,8 @@
     {
      "month": "2027-03",
      "counts": {
-      "×": 19,
-      "※": 12
+      "×": 20,
+      "※": 11
      }
     },
     {
@@ -162,7 +162,7 @@
     }
    },
    "status": "unknown",
-   "status_note": "無法判斷（目標日皆 ×；3–5 月有 25 天 ※，疑為休館日而非預約邊界）",
+   "status_note": "無法判斷（目標日皆 ×；3–5 月有 26 天 ※，疑為休館日而非預約邊界）",
    "closed_boundary": null,
    "horizon_last_open": null,
    "horizon_summary": [
@@ -175,8 +175,8 @@
     {
      "month": "2027-03",
      "counts": {
-      "×": 6,
-      "※": 25
+      "×": 5,
+      "※": 26
      }
     },
     {
@@ -244,10 +244,10 @@
    "errors": [],
    "cells": {},
    "status": "closed",
-   "status_note": "官網公告販售至 01/13，尚未涵蓋目標日期",
+   "status_note": "官網公告販售至 02/11，尚未涵蓋目標日期",
    "shouwakan": {
-    "sales_until": "2027-01-13",
-    "raw": "2027年1月13日までの販売を開始"
+    "sales_until": "2027-02-11",
+    "raw": "2027年2月11日までの販売を開始"
    }
   },
   "nagasawa": {
@@ -395,28 +395,28 @@
    "errors": [],
    "cells": {
     "2027-02-10": {
-     "2": "※",
-     "4": "※"
+     "2": "×",
+     "4": "×"
     },
     "2027-02-11": {
-     "2": "※",
-     "4": "※"
+     "2": "×",
+     "4": "×"
     },
     "2027-02-12": {
      "2": "※",
      "4": "※"
     }
    },
-   "status": "closed",
-   "status_note": "受付期間外（尚未開放）",
-   "closed_boundary": "2027-02-10",
-   "horizon_last_open": "2027-02-09",
+   "status": "unknown",
+   "status_note": "無法判斷（目標日皆 ×；3–5 月有 107 天 ※，疑為休館日而非預約邊界）",
+   "closed_boundary": "2027-02-12",
+   "horizon_last_open": "2027-02-11",
    "horizon_summary": [
     {
      "month": "2027-02",
      "counts": {
-      "×": 9,
-      "※": 19
+      "×": 11,
+      "※": 17
      }
     },
     {
