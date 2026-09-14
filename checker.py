@@ -188,7 +188,7 @@ def summarize_liberty(info: dict, today: str) -> tuple[dict[str, dict[str, str]]
         for nz in PARTY_SIZES:
             fit = [r for r in rows if (r["cap_max"] or 0) >= nz and (r["cap_min"] or 0) <= nz]
             if not fit:
-                cells[d][str(nz)] = "—"
+                cells[d][str(nz)] = "×"   # 該日沒有符合人數的房型資料，視為無房
             elif any(r["available"] for r in fit):
                 cells[d][str(nz)] = "○"; any_avail = True
             elif any((r["remain"] or 0) > 0 and r["room_available"] for r in fit):
