@@ -1,0 +1,7 @@
+# 個人資料：藤屋填寫小抄含電話與地址，絕不上傳
+docs/fujiya-copy-form.html
+docs/fujiya-copy-form.fragment.html
+
+__pycache__/
+*.pyc
+.DS_Store

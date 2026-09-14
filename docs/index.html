@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>銀山溫泉 二月空房</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+
+:root{
+  --bg:#f3f5f8; --panel:#ffffff; --line:#d9dee5; --ink:#1c2229; --muted:#6a737d; --dim:#98a1ab;
+  --accent:#3b5480; --accent-ink:#2b4066;
+  --ok:#2a7a5a; --ok-bg:#e3f2ea; --few:#b96d12; --few-bg:#fbeedc; --full:#8a9099; --full-bg:transparent;
+  --closed:#aab1ba; --closed-bg:#f0f2f5; --err:#a33a3a;
+  --shadow:0 1px 2px rgba(20,30,45,.06),0 6px 20px -12px rgba(20,30,45,.18);
+  --serif:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  --sans:"Noto Sans JP","Hiragino Sans","PingFang TC",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#131920; --panel:#1b232c; --line:#2b3540; --ink:#e7ebef; --muted:#a2acb6; --dim:#6f7a86;
+    --accent:#8fb0e6; --accent-ink:#b4cbf0;
+    --ok:#6fd2a3; --ok-bg:#183327; --few:#f0b35a; --few-bg:#3a2a12; --full:#6b7580;
+    --closed:#5a6570; --closed-bg:#1f2830; --err:#e07a7a;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -14px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#131920; --panel:#1b232c; --line:#2b3540; --ink:#e7ebef; --muted:#a2acb6; --dim:#6f7a86;
+  --accent:#8fb0e6; --accent-ink:#b4cbf0;
+  --ok:#6fd2a3; --ok-bg:#183327; --few:#f0b35a; --few-bg:#3a2a12; --full:#6b7580;
+  --closed:#5a6570; --closed-bg:#1f2830; --err:#e07a7a;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -14px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover,a:focus-visible{text-decoration:underline;text-underline-offset:2px}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:40px 24px 64px;display:grid;gap:28px}
+.top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:20px}
+.eyebrow{margin:0 0 6px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--serif);font-weight:700;font-size:clamp(22px,2.6vw,30px);line-height:1.3;margin:0;text-wrap:balance;letter-spacing:.01em}
+.gen{margin:0;display:grid;gap:4px;font-size:12px;color:var(--muted)}
+.gen div{display:flex;gap:10px}
+.gen dt{font-family:var(--mono);letter-spacing:.06em;color:var(--dim);min-width:64px}
+.gen dd{margin:0;font-variant-numeric:tabular-nums}
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px 16px;display:flex;align-items:baseline;gap:10px;box-shadow:var(--shadow)}
+.stat .n{font-family:var(--mono);font-size:28px;font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
+.stat .l{color:var(--muted);font-size:13px}
+.stat.s-ok .n{color:var(--ok)} .stat.s-full .n{color:var(--muted)} .stat.s-closed .n{color:var(--closed)} .stat.s-unknown .n{color:var(--few)}
+.tablewrap{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:6px;box-shadow:var(--shadow)}
+table.grid{border-collapse:separate;border-spacing:0;width:100%;min-width:900px}
+.grid thead th{position:sticky;top:0;background:var(--panel);z-index:1;font-weight:500;color:var(--muted);font-size:12px;text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+.grid thead .dhead{text-align:center;font-family:var(--serif);font-size:14px;color:var(--ink);border-left:1px solid var(--line);font-weight:700}
+.grid thead .nzhead{text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:.04em;min-width:56px}
+.grid thead .nzhead:nth-child(odd){border-left:1px solid var(--line)}
+.grid tbody th,.grid tbody td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
+.grid tbody tr:last-child th,.grid tbody tr:last-child td{border-bottom:0}
+.hotel{text-align:left;font-weight:400;min-width:200px}
+.hname{font-family:var(--serif);font-size:15px;font-weight:700;color:var(--ink);display:block;line-height:1.35}
+.hname:hover{color:var(--accent)}
+.meta{display:block;margin-top:4px;font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.cap-ok{color:var(--ok);font-weight:500} .cap-low{color:var(--dim)}
+.status{min-width:260px;max-width:340px}
+.pill{display:inline-block;font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--muted);letter-spacing:.02em}
+.pill.s-ok{color:var(--ok);background:var(--ok-bg);border-color:transparent}
+.pill.s-closed{color:var(--muted);background:var(--closed-bg)}
+.pill.s-other{color:var(--accent-ink);background:var(--bg)}
+.pill.s-unknown{color:var(--few);background:var(--few-bg);border-color:transparent}
+.pill.s-err{color:var(--err)}
+.note{display:block;margin-top:5px;font-size:12px;line-height:1.5;color:var(--ink)}
+.note.dim{color:var(--dim);font-size:11.5px}
+td.cell{text-align:center;font-family:var(--mono);font-size:18px;font-weight:600;line-height:1;padding-top:16px}
+td.cell:nth-child(odd){border-left:1px solid var(--line)}
+td.cell.full{color:var(--full)}
+td.cell.closed{color:var(--closed);background:var(--closed-bg)}
+td.cell.past,td.cell.na{color:var(--dim);font-weight:400}
+td.cell.few{background:var(--few-bg)} td.cell.few a{color:var(--few)}
+td.cell.ok{background:var(--ok-bg)} td.cell.ok a{color:var(--ok)}
+td.cell a{display:inline-block;padding:2px 8px;border-radius:4px;text-decoration:none}
+td.cell a:hover{outline:2px solid currentColor}
+tr.s-ok .hname{color:var(--ok)}
+.legend,.changes{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:18px 20px;box-shadow:var(--shadow)}
+h2{font-family:var(--serif);font-size:16px;margin:0 0 10px;font-weight:700}
+.legend ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:6px 20px;font-size:13px}
+.legend li{display:flex;align-items:center;gap:10px}
+.sym{font-family:var(--mono);font-size:16px;font-weight:600;width:28px;height:28px;display:inline-grid;place-items:center;border-radius:4px;border:1px solid var(--line)}
+.sym.ok{color:var(--ok);background:var(--ok-bg);border-color:transparent} .sym.few{color:var(--few);background:var(--few-bg);border-color:transparent}
+.sym.full{color:var(--full)} .sym.closed{color:var(--closed);background:var(--closed-bg)} .sym.na{color:var(--dim)}
+.fine{margin:14px 0 0;font-size:12px;color:var(--muted);max-width:72ch;line-height:1.65}
+.hist{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:13px}
+.hist .ts{font-family:var(--mono);color:var(--muted);font-size:12px;margin-right:6px}
+.hist .chg{font-family:var(--mono);color:var(--accent-ink);margin-left:6px}
+.empty{margin:0;color:var(--muted);font-size:13px;max-width:72ch}
+.foot{font-size:12px;color:var(--dim);display:grid;gap:4px;max-width:80ch}
+.foot p{margin:0}
+@media (max-width:640px){.wrap{padding:24px 14px 48px}.status{min-width:220px}}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="top">
+    <div>
+      <p class="eyebrow">銀山温泉 · 空室狀態</p>
+      <h1>2027 年 2 月 10 – 12 日<br>四人房一間，或兩人房兩間</h1>
+    </div>
+    <dl class="gen">
+      <div><dt>最後更新</dt><dd>2026/09/12 22:00 JST</dd></div>
+      <div><dt>資料來源</dt><dd>共用預約引擎 nj-yoyaku.net 月曆、昭和館官網公告</dd></div>
+    </dl>
+  </header>
+
+  <section class="summary" aria-label="摘要">
+    <div class="stat s-ok"><span class="n">0</span><span class="l">間有空房</span></div>
+    <div class="stat s-full"><span class="n">0</span><span class="l">間已開放・滿室</span></div>
+    <div class="stat s-closed"><span class="n">2</span><span class="l">間尚未開放</span></div>
+    <div class="stat s-unknown"><span class="n">10</span><span class="l">間無法判斷</span></div>
+  </section>
+
+  <section class="tablewrap">
+    <table class="grid">
+      <thead>
+        <tr>
+          <th rowspan="2" class="hhead">旅館</th>
+          <th rowspan="2" class="shead">開放狀態</th>
+          <th colspan='2' class='dhead'>2/10（水）</th><th colspan='2' class='dhead'>2/11（木）</th><th colspan='2' class='dhead'>2/12（金）</th>
+        </tr>
+        <tr><th class='nzhead'>2人</th><th class='nzhead'>4人</th><th class='nzhead'>2人</th><th class='nzhead'>4人</th><th class='nzhead'>2人</th><th class='nzhead'>4人</th></tr>
+      </thead>
+      <tbody>
+        <tr class='s-unknown'>
+          <th scope='row' class='hotel'>
+            <a class='hname' href='https://www.nj-yoyaku.net/ginzanso/plan.aspx?PID=-1' target='_blank' rel='noopener'>仙峡の宿 銀山荘</a>
+            <span class='meta'><span class='cap-ok'>最多 6 人</span> · <a href='https://www.ginzanso.jp/' target='_blank' rel='noopener'>官網</a> · 0237-28-2322</span>
+          </th>
+          <td class='status'>
+            <span class='pill s-unknown'>無法判斷</span>
+            <span class='note'>無法判斷（目標日皆 ×；3–5 月有 14 天 ※，疑為休館日而非預約邊界）</span>
+            
+            <span class='note dim'>開放規則：每月 1 日開放 5 個月後（部落格整理，未驗證）</span>
+          </td>
+          <td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td>
+        </tr>
+        <tr class='s-unknown'>
+          <th scope='row' class='hotel'>
+            <a class='hname' href='https://www.nj-yoyaku.net/kosekiya/plan.aspx?PID=-1' target='_blank' rel='noopener'>古勢起屋別館</a>
+            <span class='meta'><span class='cap-ok'>最多 6 人</span> · <a href='https://www.kosekiya.jp/' target='_blank' rel='noopener'>官網</a> · 0237-28-2322</span>
+          </th>
+          <td class='status'>
+            <span class='pill s-unknown'>無法判斷</span>
+            <span class='note'>無法判斷（滿室或未開放，2–5 月符號皆為 ×）</span>
+            
+            <span class='note dim'>開放規則：每月 1 日開放 5 個月後（部落格整理，未驗證）</span>
+          </td>
+          <td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td>
+        </tr>
+        <tr class='s-unknown'>
+          <th scope='row' class='hotel'>
+            <a class='hname' href='https://www.nj-yoyaku.net/kosekikan/plan.aspx?PID=-1' target='_blank' rel='noopener'>本館古勢起屋</a>
+            <span class='meta'><span class='cap-low'>最多 2 人</span> · <a href='https://www.kosekikan.com/' target='_blank' rel='noopener'>官網</a> · 0237-28-2322</span>
+          </th>
+          <td class='status'>
+            <span class='pill s-unknown'>無法判斷</span>
+            <span class='note'>無法判斷（目標日皆 ×；3–5 月有 19 天 ※，疑為休館日而非預約邊界）</span>
+            
+            <span class='note dim'>開放規則：每月 1 日開放 5 個月後（部落格整理，未驗證）</span>
+          </td>
+          <td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td>
+        </tr>
+        <tr class='s-unknown'>
+          <th scope='row' class='hotel'>
+            <a class='hname' href='https://www.nj-yoyaku.net/takimikan/plan.aspx?PID=-1' target='_blank' rel='noopener'>滝と蕎麦の宿 瀧見館</a>
+            <span class='meta'><span class='cap-low'>最多 3 人</span> · <a href='https://www.takimikan.jp/' target='_blank' rel='noopener'>官網</a> · 0237-28-2164</span>
+          </th>
+          <td class='status'>
+            <span class='pill s-unknown'>無法判斷</span>
+            <span class='note'>無法判斷（目標日皆 ×；3–5 月有 25 天 ※，疑為休館日而非預約邊界）</span>
+            
+            <span class='note dim'>開放規則：6 個月以上前（部落格整理，未驗證）</span>
+          </td>
+          <td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td>
+        </tr>
+        <tr class='s-unknown'>
+          <th scope='row' class='hotel'>
+            <a class='hname' href='https://www.nj-yoyaku.net/notoya/plan.aspx?PID=-1' target='_blank' rel='noopener'>能登屋旅館</a>
+            <span class='meta'><span class='cap-ok'>最多 6 人</span> · <a href='http://www.notoyaryokan.com/' target='_blank' rel='noopener'>官網</a> · 0237-28-2327</span>
+          </th>
+          <td class='status'>
+            <span class='pill s-unknown'>無法判斷</span>
+            <span class='note'>無法判斷（滿室或未開放，2–5 月符號皆為 ×）</span>
+            
+            <span class='note dim'>開放規則：約 6 個月前（部落格整理，未驗證）</span>
+          </td>
+          <td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td>
+        </tr>
+        <tr class='s-closed'>
+          <th scope='row' class='hotel'>
+            <a class='hname' href='https://site.reservation.liberty-service.com/cc5f559e549f4f2fac443b9673014a37/facility-db690034-b45f-46b5-84d1-3f8ba4b8f522/search' target='_blank' rel='noopener'>味とまごころの宿 昭和館</a>
+            <span class='meta'><span class='cap-ok'>最多 4 人</span> · <a href='http://www.shouwakan.net/' target='_blank' rel='noopener'>官網</a> · 0237-28-2151</span>
+          </th>
+          <td class='status'>
+            <span class='pill s-closed'>未開放</span>
+            <span class='note'>官網公告販售至 01/13，尚未涵蓋目標日期</span>
+            
+            <span class='note dim'>開放規則：分批開賣，於官網 NEWS 公告「○月○日までの販売を開始」；2026/07/02 起改用 Liberty 訂房系統，共用引擎頁面疑似廢棄</span>
+          </td>
+          <td class='cell na'>—</td><td class='cell na'>—</td><td class='cell na'>—</td><td class='cell na'>—</td><td class='cell na'>—</td><td class='cell na'>—</td>
+        </tr>
+        <tr class='s-unknown'>
+          <th scope='row' class='hotel'>
+            <a class='hname' href='https://www.nj-yoyaku.net/nagasawa/plan.aspx?PID=-1' target='_blank' rel='noopener'>旅館 永澤平八</a>
+            <span class='meta'><span class='cap-ok'>最多 4 人</span> · <a href='https://www.nagasawa-heihachi.com/' target='_blank' rel='noopener'>官網</a> · 0237-28-2137</span>
+          </th>
+          <td class='status'>
+            <span class='pill s-unknown'>無法判斷</span>
+            <span class='note'>無法判斷（滿室或未開放，2–5 月符號皆為 ×）</span>
+            
+            <span class='note dim'>開放規則：每月 1 日 09:00 開放 3 個月後，電話優先（官網明載）</span>
+          </td>
+          <td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td>
+        </tr>
+        <tr class='s-unknown'>
+          <th scope='row' class='hotel'>
+            <a class='hname' href='https://www.nj-yoyaku.net/itouya/plan.aspx?PID=-1' target='_blank' rel='noopener'>旅籠 いとうや</a>
+            <span class='meta'><span class='cap-low'>最多 3 人</span> · <a href='https://hatago-itouya.com/' target='_blank' rel='noopener'>官網</a> · 0237-28-2025</span>
+          </th>
+          <td class='status'>
+            <span class='pill s-unknown'>無法判斷</span>
+            <span class='note'>無法判斷（滿室或未開放，2–5 月符號皆為 ×）</span>
+            
+            <span class='note dim'>開放規則：不定期（部落格整理，未驗證）</span>
+          </td>
+          <td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td>
+        </tr>
+        <tr class='s-unknown'>
+          <th scope='row' class='hotel'>
+            <a class='hname' href='https://www.nj-yoyaku.net/yanadaya/plan.aspx?PID=-1' target='_blank' rel='noopener'>御宿 やなだ屋</a>
+            <span class='meta'><span class='cap-ok'>最多 4 人</span> · <a href='https://yanadaya.com/' target='_blank' rel='noopener'>官網</a> · 0237-28-2030</span>
+          </th>
+          <td class='status'>
+            <span class='pill s-unknown'>無法判斷</span>
+            <span class='note'>無法判斷（滿室或未開放，2–5 月符號皆為 ×）</span>
+            
+            <span class='note dim'>開放規則：需向旅館確認（部落格整理，未驗證）</span>
+          </td>
+          <td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td>
+        </tr>
+        <tr class='s-closed'>
+          <th scope='row' class='hotel'>
+            <a class='hname' href='https://www.nj-yoyaku.net/fujiya/plan.aspx?PID=-1' target='_blank' rel='noopener'>藤屋</a>
+            <span class='meta'><span class='cap-low'>最多 3 人</span> · <a href='https://www.fujiya-ginzan.com/' target='_blank' rel='noopener'>官網</a> · 0237-28-2141</span>
+          </th>
+          <td class='status'>
+            <span class='pill s-closed'>未開放</span>
+            <span class='note'>受付期間外（尚未開放）</span>
+            <span class='note dim'>目前開放至：2/9（火）</span>
+            <span class='note dim'>開放規則：入住日 150 天前 00:00（部落格整理，未驗證）</span>
+          </td>
+          <td class='cell closed' title='受付期間外'>※</td><td class='cell closed' title='受付期間外'>※</td><td class='cell closed' title='受付期間外'>※</td><td class='cell closed' title='受付期間外'>※</td><td class='cell closed' title='受付期間外'>※</td><td class='cell closed' title='受付期間外'>※</td>
+        </tr>
+        <tr class='s-unknown'>
+          <th scope='row' class='hotel'>
+            <a class='hname' href='https://www.nj-yoyaku.net/matsumoto/plan.aspx?PID=-1' target='_blank' rel='noopener'>旅館 松本</a>
+            <span class='meta'><span class='cap-low'>不明</span> · <a href='http://www.ginzan-matsumoto.com' target='_blank' rel='noopener'>官網</a> · 0237-28-2021</span>
+          </th>
+          <td class='status'>
+            <span class='pill s-unknown'>無法判斷</span>
+            <span class='note'>無法判斷（滿室或未開放，2–5 月符號皆為 ×）</span>
+            
+            <span class='note dim'>開放規則：入住月 3 個月前的月初（部落格整理，未驗證）；引擎上目前無房型資料</span>
+          </td>
+          <td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td>
+        </tr>
+        <tr class='s-unknown'>
+          <th scope='row' class='hotel'>
+            <a class='hname' href='https://www.nj-yoyaku.net/kozankaku/plan.aspx?PID=-1' target='_blank' rel='noopener'>古山閣</a>
+            <span class='meta'><span class='cap-ok'>最多 8 人</span> · <a href='https://kozankaku.com/' target='_blank' rel='noopener'>官網</a> · 0237-28-2039</span>
+          </th>
+          <td class='status'>
+            <span class='pill s-unknown'>無法判斷</span>
+            <span class='note'>無法判斷（滿室或未開放，2–5 月符號皆為 ×）</span>
+            
+            <span class='note dim'>開放規則：每月 1 日開放 3 個月後（部落格整理，未驗證）</span>
+          </td>
+          <td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td>
+        </tr>
+        <tr class='s-na'>
+          <th scope='row' class='hotel'>
+            <a class='hname' href='https://kozankaku.com/auberge.html' target='_blank' rel='noopener'>クラノバ</a>
+            <span class='meta'><span class='cap-low'>不明</span> · <a href='https://kozankaku.com/auberge.html' target='_blank' rel='noopener'>官網</a> · 0237-28-2039</span>
+          </th>
+          <td class='status'>
+            <span class='pill s-na'>不在引擎上</span>
+            <span class='note'>不在共用引擎上，需另查</span>
+            
+            <span class='note dim'>開放規則：古山閣附屬 Auberge，無共用引擎頁面，需另查</span>
+          </td>
+          <td class='cell na'>—</td><td class='cell na'>—</td><td class='cell na'>—</td><td class='cell na'>—</td><td class='cell na'>—</td><td class='cell na'>—</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="legend">
+    <h2>符號</h2>
+    <ul>
+      <li><span class="sym ok">○</span>有空房，點格子直達該日訂房頁</li>
+      <li><span class="sym few">△</span>少量空房，可能只剩一間</li>
+      <li><span class="sym full">×</span>滿室，<em>或</em>尚未開放預約。引擎用同一符號，無法區分</li>
+      <li><span class="sym closed">※</span>受付期間外，可確定尚未開放</li>
+      <li><span class="sym na">—</span>此旅館不在共用引擎上，或無此人數選項</li>
+    </ul>
+    <p class="fine">「開放狀態」是腳本的推論：目標日期為 × 且 ※ 從某日起連續到 5 月底（容許少數孤立雜訊日），判為「已開放・滿室」；零星或之後又恢復 × 的 ※ 視為休館日，不算邊界；目標日期本身為 ※ 判為「未開放」；2–5 月全為 × 則無法判斷，請對照該旅館的開放規則。引擎不顯示剩餘間數，兩人房 × 2 需在出現 ○ 或 △ 後人工至訂房頁確認。</p>
+  </section>
+
+  <section class="changes">
+    <h2>最近變化</h2>
+    <p class='empty'>尚無變化紀錄。腳本每次執行都會與上一次比對，任何格子的符號改變都會列在這裡。</p>
+  </section>
+
+  <footer class="foot">
+    <p>每 2 人 / 4 人欄位對應引擎的「一室当りのご利用人数」篩選。各旅館開放規則除永澤平八官網明載外，皆為部落格整理、未經官方驗證。</p>
+    <p>官網旅館列表 <a href="https://www.ginzanonsen.jp/yado/" target="_blank" rel="noopener">ginzanonsen.jp/yado</a> · 預約入口 <a href="https://www.nj-yoyaku.net/portal/main" target="_blank" rel="noopener">nj-yoyaku.net/portal</a></p>
+  </footer>
+</main>
+</body>
+</html>

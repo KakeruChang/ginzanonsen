@@ -1,0 +1,15 @@
+[
+  {"id": "ginzanso",  "name": "仙峡の宿 銀山荘",   "engine": "njy", "max_capacity": 6, "official": "https://www.ginzanso.jp/",          "tel": "0237-28-2322", "open_rule": "每月 1 日開放 5 個月後（部落格整理，未驗證）"},
+  {"id": "kosekiya",  "name": "古勢起屋別館",      "engine": "njy", "max_capacity": 6, "official": "https://www.kosekiya.jp/",          "tel": "0237-28-2322", "open_rule": "每月 1 日開放 5 個月後（部落格整理，未驗證）"},
+  {"id": "kosekikan", "name": "本館古勢起屋",      "engine": "njy", "max_capacity": 2, "official": "https://www.kosekikan.com/",        "tel": "0237-28-2322", "open_rule": "每月 1 日開放 5 個月後（部落格整理，未驗證）"},
+  {"id": "takimikan", "name": "滝と蕎麦の宿 瀧見館", "engine": "njy", "max_capacity": 3, "official": "https://www.takimikan.jp/",         "tel": "0237-28-2164", "open_rule": "6 個月以上前（部落格整理，未驗證）"},
+  {"id": "notoya",    "name": "能登屋旅館",        "engine": "njy", "max_capacity": 6, "official": "http://www.notoyaryokan.com/",      "tel": "0237-28-2327", "open_rule": "約 6 個月前（部落格整理，未驗證）"},
+  {"id": "showakan",  "name": "味とまごころの宿 昭和館", "engine": "shouwakan", "max_capacity": 4, "official": "http://www.shouwakan.net/", "tel": "0237-28-2151", "open_rule": "分批開賣，於官網 NEWS 公告「○月○日までの販売を開始」；2026/07/02 起改用 Liberty 訂房系統，共用引擎頁面疑似廢棄", "booking_url": "https://site.reservation.liberty-service.com/cc5f559e549f4f2fac443b9673014a37/facility-db690034-b45f-46b5-84d1-3f8ba4b8f522/search"},
+  {"id": "nagasawa",  "name": "旅館 永澤平八",     "engine": "njy", "max_capacity": 4, "official": "https://www.nagasawa-heihachi.com/", "tel": "0237-28-2137", "open_rule": "每月 1 日 09:00 開放 3 個月後，電話優先（官網明載）"},
+  {"id": "itouya",    "name": "旅籠 いとうや",     "engine": "njy", "max_capacity": 3, "official": "https://hatago-itouya.com/",        "tel": "0237-28-2025", "open_rule": "不定期（部落格整理，未驗證）"},
+  {"id": "yanadaya",  "name": "御宿 やなだ屋",     "engine": "njy", "max_capacity": 4, "official": "https://yanadaya.com/",             "tel": "0237-28-2030", "open_rule": "需向旅館確認（部落格整理，未驗證）"},
+  {"id": "fujiya",    "name": "藤屋",              "engine": "njy", "max_capacity": 3, "official": "https://www.fujiya-ginzan.com/",    "tel": "0237-28-2141", "open_rule": "入住日 150 天前 00:00（部落格整理，未驗證）"},
+  {"id": "matsumoto", "name": "旅館 松本",         "engine": "njy", "max_capacity": null, "official": "http://www.ginzan-matsumoto.com", "tel": "0237-28-2021", "open_rule": "入住月 3 個月前的月初（部落格整理，未驗證）；引擎上目前無房型資料"},
+  {"id": "kozankaku", "name": "古山閣",            "engine": "njy", "max_capacity": 8, "official": "https://kozankaku.com/",            "tel": "0237-28-2039", "open_rule": "每月 1 日開放 3 個月後（部落格整理，未驗證）"},
+  {"id": "kuranoba",  "name": "クラノバ",          "engine": "none", "max_capacity": null, "official": "https://kozankaku.com/auberge.html", "tel": "0237-28-2039", "open_rule": "古山閣附屬 Auberge，無共用引擎頁面，需另查"}
+]

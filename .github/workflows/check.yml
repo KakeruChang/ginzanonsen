@@ -1,0 +1,53 @@
+name: check availability
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"   # 每 30 分鐘（UTC）。GitHub 排程常延遲數分鐘。
+  workflow_dispatch:          # 也可在 Actions 頁面手動觸發
+
+permissions:
+  contents: write   # 有變化時把 data/ 提交回 repo
+  pages: write
+  id-token: write
+
+concurrency:
+  group: check-availability
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 抓取並產生狀態頁
+        run: python3 checker.py
+
+      - name: 有變化時提交 data/
+        run: |
+          git add data/
+          if git diff --cached --quiet -- data/history.jsonl; then
+            echo "無符號變化，不提交"
+            git reset -q
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git commit -m "record availability change $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push
+          fi
+
+      - name: 上傳 docs/ 作為 Pages 內容
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - name: 發佈到 GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
