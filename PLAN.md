@@ -145,7 +145,10 @@ GET https://www.nj-yoyaku.net/{hotel_id}/plan.aspx?TDT=YYYYMMDD&NZ={人數}
 - 官網 NEWS 2026/08/18：「現在、2027年1月13日までの販売を開始しております」。不是固定規則，而是分批延長販售截止日並公告。
 - 2026/07/02 起訂房系統改為 Liberty（site.reservation.liberty-service.com，Nuxt SPA，背後有 `/api/booking/price-calendars`、`/api/booking/search`）。
   nj-yoyaku 上的 showakan 頁僅剩 1 個方案且全年 ×，判定為廢棄，腳本不再讀取。
-- 第一階段只監看官網公告日期；公告涵蓋 2/12 後再以瀏覽器或 API 查 Liberty 系統的實際空房。
+- 2026‑09‑14 起 checker 直接呼叫 Liberty API（`webapi.site.reservation.liberty-service.com`，標頭 `X-Site-Code` / `X-Facility-Code: facility-…`，
+  `POST /api/booking/search` 需 `checkInDate`/`checkOutDate`（yyyymmdd 整數）、`restNumber`、`roomNumber`、`guestsPerRoom[{appDateId, personAgeTypeId, number}]`）。
+  回傳每房型每日 `remainNumber`（庫存）與狀態旗標；`GET /api/booking/plans/{p}/rooms/{r}` 有定員與 `bookingReceptionStart`。
+- 實測：2 月房型有庫存，但「官方事前決済」方案 `bookingReceptionStart = 2026‑12‑01`，12/1 前系統不受理。官網公告的「販売」與此不一致，以 API 為準。
 
 ## 4. 已知限制與風險
 

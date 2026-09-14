@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-14T14:37:05+09:00",
+ "generated_at": "2026-09-14T15:14:30+09:00",
  "hotels": {
   "ginzanso": {
    "errors": [],
@@ -242,12 +242,319 @@
   },
   "showakan": {
    "errors": [],
-   "cells": {},
-   "status": "opened",
-   "status_note": "官網公告販售至 02/11，已涵蓋 02/10、02/11，請至官網系統查空房",
+   "cells": {
+    "2027-02-10": {
+     "2": "※",
+     "4": "※"
+    },
+    "2027-02-11": {
+     "2": "※",
+     "4": "※"
+    },
+    "2027-02-12": {
+     "2": "※",
+     "4": "※"
+    }
+   },
+   "status": "closed",
+   "status_note": "各房型有庫存但尚未受理（受付開始 2026/12/1）；官網公告販售至 02/11",
+   "liberty_lines": [
+    "02/10：川側・和室８畳（2–3人） 在庫3、山側・和室１２畳（2–4人） 在庫1、川側・和室６畳　屋内ベラ（2–2人） 在庫2、デラックスツイン（2–2人） 在庫2、シングルルーム（1–1人） 在庫3",
+    "02/11：川側・和室８畳（2–3人） 在庫2、山側・和室１２畳（2–4人） 在庫2、川側・和室６畳　屋内ベラ（2–2人） 在庫2、デラックスツイン（2–2人） 在庫2、シングルルーム（1–1人） 在庫2",
+    "02/12：系統尚無此日資料（未開賣）"
+   ],
    "shouwakan": {
     "sales_until": "2027-02-11",
     "raw": "2027年2月11日までの販売を開始"
+   },
+   "liberty": {
+    "dates": {
+     "2027-02-10": [
+      {
+       "plan_id": 85679,
+       "plan": "◆オフィシャル事前決済【旬旅♪】白銀の温泉街と大正ロマン♪季節を味わう冬の恵み会席☆[禁煙]☆［1泊2食付］",
+       "room_id": 604,
+       "room": "川側・和室８畳＋屋内ベランダ２畳",
+       "cap_min": 2,
+       "cap_max": 3,
+       "reception_start": 20261201,
+       "remain": 3,
+       "available": false,
+       "room_available": true,
+       "accept": true,
+       "price": null
+      },
+      {
+       "plan_id": 85679,
+       "plan": "◆オフィシャル事前決済【旬旅♪】白銀の温泉街と大正ロマン♪季節を味わう冬の恵み会席☆[禁煙]☆［1泊2食付］",
+       "room_id": 605,
+       "room": "山側・和室１２畳（一部フローリングあり）",
+       "cap_min": 2,
+       "cap_max": 4,
+       "reception_start": 20261201,
+       "remain": 1,
+       "available": false,
+       "room_available": true,
+       "accept": true,
+       "price": null
+      },
+      {
+       "plan_id": 85679,
+       "plan": "◆オフィシャル事前決済【旬旅♪】白銀の温泉街と大正ロマン♪季節を味わう冬の恵み会席☆[禁煙]☆［1泊2食付］",
+       "room_id": 617,
+       "room": "川側・和室６畳　屋内ベランダ付き",
+       "cap_min": 2,
+       "cap_max": 2,
+       "reception_start": 20261201,
+       "remain": 2,
+       "available": false,
+       "room_available": true,
+       "accept": true,
+       "price": null
+      },
+      {
+       "plan_id": 85679,
+       "plan": "◆オフィシャル事前決済【旬旅♪】白銀の温泉街と大正ロマン♪季節を味わう冬の恵み会席☆[禁煙]☆［1泊2食付］",
+       "room_id": 622,
+       "room": "New【静かな山側】デラックスツイン＜広さ約24.5㎡＞洋室ベッド",
+       "cap_min": 2,
+       "cap_max": 2,
+       "reception_start": 20261201,
+       "remain": 2,
+       "available": false,
+       "room_available": true,
+       "accept": true,
+       "price": null
+      },
+      {
+       "plan_id": 85681,
+       "plan": "◆オフィシャル事前決済【ひとりで快適♪】冬の銀山温泉を心ゆくまで。シングルルーム☆［禁煙］☆［1泊2食付］",
+       "room_id": 621,
+       "room": "【静かな山側】シングルルーム＜広さ約14.7㎡＞洋室ベッド",
+       "cap_min": 1,
+       "cap_max": 1,
+       "reception_start": 20261201,
+       "remain": 3,
+       "available": false,
+       "room_available": true,
+       "accept": true,
+       "price": null
+      },
+      {
+       "plan_id": 829,
+       "plan": "◆【旬旅♪】季節を味わう旬の恵み会席♪大正ロマン漂う街へ…☆[禁煙]☆［1泊2食付］",
+       "room_id": 604,
+       "room": "川側・和室８畳＋屋内ベランダ２畳",
+       "cap_min": 2,
+       "cap_max": 3,
+       "reception_start": 20250918,
+       "remain": 3,
+       "available": false,
+       "room_available": false,
+       "accept": true,
+       "price": null
+      },
+      {
+       "plan_id": 829,
+       "plan": "◆【旬旅♪】季節を味わう旬の恵み会席♪大正ロマン漂う街へ…☆[禁煙]☆［1泊2食付］",
+       "room_id": 605,
+       "room": "山側・和室１２畳（一部フローリングあり）",
+       "cap_min": 2,
+       "cap_max": 4,
+       "reception_start": 20250918,
+       "remain": 1,
+       "available": false,
+       "room_available": false,
+       "accept": true,
+       "price": null
+      },
+      {
+       "plan_id": 829,
+       "plan": "◆【旬旅♪】季節を味わう旬の恵み会席♪大正ロマン漂う街へ…☆[禁煙]☆［1泊2食付］",
+       "room_id": 617,
+       "room": "川側・和室６畳　屋内ベランダ付き",
+       "cap_min": 2,
+       "cap_max": 2,
+       "reception_start": 20250918,
+       "remain": 2,
+       "available": false,
+       "room_available": false,
+       "accept": true,
+       "price": null
+      },
+      {
+       "plan_id": 829,
+       "plan": "◆【旬旅♪】季節を味わう旬の恵み会席♪大正ロマン漂う街へ…☆[禁煙]☆［1泊2食付］",
+       "room_id": 622,
+       "room": "New【静かな山側】デラックスツイン＜広さ約24.5㎡＞洋室ベッド",
+       "cap_min": 2,
+       "cap_max": 2,
+       "reception_start": 20250918,
+       "remain": 2,
+       "available": false,
+       "room_available": false,
+       "accept": true,
+       "price": null
+      },
+      {
+       "plan_id": 830,
+       "plan": "◆【ひとりで快適♪】銀山温泉を一人でのんびり気ままに満喫！シングルルーム☆［禁煙］☆［1泊2食付］",
+       "room_id": 621,
+       "room": "【静かな山側】シングルルーム＜広さ約14.7㎡＞洋室ベッド",
+       "cap_min": 1,
+       "cap_max": 1,
+       "reception_start": 20250919,
+       "remain": 3,
+       "available": false,
+       "room_available": false,
+       "accept": true,
+       "price": null
+      }
+     ],
+     "2027-02-11": [
+      {
+       "plan_id": 85679,
+       "plan": "◆オフィシャル事前決済【旬旅♪】白銀の温泉街と大正ロマン♪季節を味わう冬の恵み会席☆[禁煙]☆［1泊2食付］",
+       "room_id": 604,
+       "room": "川側・和室８畳＋屋内ベランダ２畳",
+       "cap_min": 2,
+       "cap_max": 3,
+       "reception_start": 20261201,
+       "remain": 2,
+       "available": false,
+       "room_available": true,
+       "accept": true,
+       "price": null
+      },
+      {
+       "plan_id": 85679,
+       "plan": "◆オフィシャル事前決済【旬旅♪】白銀の温泉街と大正ロマン♪季節を味わう冬の恵み会席☆[禁煙]☆［1泊2食付］",
+       "room_id": 605,
+       "room": "山側・和室１２畳（一部フローリングあり）",
+       "cap_min": 2,
+       "cap_max": 4,
+       "reception_start": 20261201,
+       "remain": 2,
+       "available": false,
+       "room_available": true,
+       "accept": true,
+       "price": null
+      },
+      {
+       "plan_id": 85679,
+       "plan": "◆オフィシャル事前決済【旬旅♪】白銀の温泉街と大正ロマン♪季節を味わう冬の恵み会席☆[禁煙]☆［1泊2食付］",
+       "room_id": 617,
+       "room": "川側・和室６畳　屋内ベランダ付き",
+       "cap_min": 2,
+       "cap_max": 2,
+       "reception_start": 20261201,
+       "remain": 2,
+       "available": false,
+       "room_available": true,
+       "accept": true,
+       "price": null
+      },
+      {
+       "plan_id": 85679,
+       "plan": "◆オフィシャル事前決済【旬旅♪】白銀の温泉街と大正ロマン♪季節を味わう冬の恵み会席☆[禁煙]☆［1泊2食付］",
+       "room_id": 622,
+       "room": "New【静かな山側】デラックスツイン＜広さ約24.5㎡＞洋室ベッド",
+       "cap_min": 2,
+       "cap_max": 2,
+       "reception_start": 20261201,
+       "remain": 2,
+       "available": false,
+       "room_available": true,
+       "accept": true,
+       "price": null
+      },
+      {
+       "plan_id": 85681,
+       "plan": "◆オフィシャル事前決済【ひとりで快適♪】冬の銀山温泉を心ゆくまで。シングルルーム☆［禁煙］☆［1泊2食付］",
+       "room_id": 621,
+       "room": "【静かな山側】シングルルーム＜広さ約14.7㎡＞洋室ベッド",
+       "cap_min": 1,
+       "cap_max": 1,
+       "reception_start": 20261201,
+       "remain": 2,
+       "available": false,
+       "room_available": true,
+       "accept": true,
+       "price": null
+      },
+      {
+       "plan_id": 829,
+       "plan": "◆【旬旅♪】季節を味わう旬の恵み会席♪大正ロマン漂う街へ…☆[禁煙]☆［1泊2食付］",
+       "room_id": 604,
+       "room": "川側・和室８畳＋屋内ベランダ２畳",
+       "cap_min": 2,
+       "cap_max": 3,
+       "reception_start": 20250918,
+       "remain": 2,
+       "available": false,
+       "room_available": false,
+       "accept": true,
+       "price": null
+      },
+      {
+       "plan_id": 829,
+       "plan": "◆【旬旅♪】季節を味わう旬の恵み会席♪大正ロマン漂う街へ…☆[禁煙]☆［1泊2食付］",
+       "room_id": 605,
+       "room": "山側・和室１２畳（一部フローリングあり）",
+       "cap_min": 2,
+       "cap_max": 4,
+       "reception_start": 20250918,
+       "remain": 2,
+       "available": false,
+       "room_available": false,
+       "accept": true,
+       "price": null
+      },
+      {
+       "plan_id": 829,
+       "plan": "◆【旬旅♪】季節を味わう旬の恵み会席♪大正ロマン漂う街へ…☆[禁煙]☆［1泊2食付］",
+       "room_id": 617,
+       "room": "川側・和室６畳　屋内ベランダ付き",
+       "cap_min": 2,
+       "cap_max": 2,
+       "reception_start": 20250918,
+       "remain": 2,
+       "available": false,
+       "room_available": false,
+       "accept": true,
+       "price": null
+      },
+      {
+       "plan_id": 829,
+       "plan": "◆【旬旅♪】季節を味わう旬の恵み会席♪大正ロマン漂う街へ…☆[禁煙]☆［1泊2食付］",
+       "room_id": 622,
+       "room": "New【静かな山側】デラックスツイン＜広さ約24.5㎡＞洋室ベッド",
+       "cap_min": 2,
+       "cap_max": 2,
+       "reception_start": 20250918,
+       "remain": 2,
+       "available": false,
+       "room_available": false,
+       "accept": true,
+       "price": null
+      },
+      {
+       "plan_id": 830,
+       "plan": "◆【ひとりで快適♪】銀山温泉を一人でのんびり気ままに満喫！シングルルーム☆［禁煙］☆［1泊2食付］",
+       "room_id": 621,
+       "room": "【静かな山側】シングルルーム＜広さ約14.7㎡＞洋室ベッド",
+       "cap_min": 1,
+       "cap_max": 1,
+       "reception_start": 20250919,
+       "remain": 2,
+       "available": false,
+       "room_available": false,
+       "accept": true,
+       "price": null
+      }
+     ],
+     "2027-02-12": []
+    }
    }
   },
   "nagasawa": {

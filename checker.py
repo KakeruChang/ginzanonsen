@@ -105,6 +105,131 @@ def fetch_shouwakan() -> dict:
     return {"sales_until": f"{y:04d}-{mo:02d}-{d:02d}", "raw": m.group(0)}
 
 
+# ── 昭和館：Liberty 訂房系統 API ─────────────────────────────────────────────
+LIBERTY_API = "https://webapi.site.reservation.liberty-service.com"
+LIBERTY_SITE = "cc5f559e549f4f2fac443b9673014a37"
+LIBERTY_FACILITY = "facility-db690034-b45f-46b5-84d1-3f8ba4b8f522"
+LIBERTY_PAGE = ("https://site.reservation.liberty-service.com/"
+                f"{LIBERTY_SITE}/{LIBERTY_FACILITY}/search")
+
+
+def liberty_request(path: str, body: dict | None = None) -> dict | list:
+    headers = {
+        "User-Agent": UA, "Accept": "application/json", "Accept-Language": "ja",
+        "Time-Zone-Offset": "9", "X-Site-Code": LIBERTY_SITE, "X-Facility-Code": LIBERTY_FACILITY,
+        "Origin": "https://site.reservation.liberty-service.com", "Referer": LIBERTY_PAGE,
+    }
+    data = None
+    if body is not None:
+        headers["Content-Type"] = "application/json"
+        data = json.dumps(body).encode()
+    sep = "&" if "?" in path else "?"
+    req = urllib.request.Request(f"{LIBERTY_API}{path}{sep}api-version=1", data=data, headers=headers,
+                                 method="POST" if body is not None else "GET")
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        out = json.loads(resp.read().decode("utf-8"))
+    time.sleep(REQUEST_GAP_SEC)
+    return out
+
+
+def fetch_shouwakan_liberty() -> dict:
+    """回傳 {'dates': {date: [ {plan, room, capacity, remain, available, price, reception_start} ]}, 'reception_start': ...}"""
+    fac = liberty_request("/api/booking/facility")
+    adult = next(t for t in fac["personAgeTypes"] if t.get("isMain"))
+    details: dict[tuple[int, int], dict] = {}
+    dates: dict[str, list[dict]] = {}
+    for d in TARGET_DATES:
+        di = int(d.replace("-", ""))
+        nxt = int((date.fromisoformat(d) + timedelta(days=1)).strftime("%Y%m%d"))
+        body = {"checkInDate": di, "checkOutDate": nxt, "restNumber": 1, "roomNumber": 1,
+                "guestsPerRoom": [{"appDateId": di, "personAgeTypeId": adult["id"],
+                                   "personAgeTypeCode": adult["code"], "number": 2}]}
+        plans = liberty_request("/api/booking/search?page=1&size=50", body)
+        rows = []
+        for plan in plans:
+            for room in plan.get("rooms", []):
+                key = (plan["id"], room["id"])
+                if key not in details:
+                    det = liberty_request(f"/api/booking/plans/{plan['id']}/rooms/{room['id']}")
+                    rg = det.get("roomGroup") or {}
+                    details[key] = {"cap_min": rg.get("capacityMin"), "cap_max": rg.get("capacityMax"),
+                                    "reception_start": det.get("bookingReceptionStart") if det.get("useBookingReception") else None}
+                adp = next((x for x in room.get("appDatePrices", []) if x.get("appDateId") == di), None)
+                if not adp:
+                    continue
+                st = adp.get("status") or {}
+                rows.append({
+                    "plan_id": plan["id"], "plan": plan["name"], "room_id": room["id"], "room": room["name"],
+                    "cap_min": details[key]["cap_min"], "cap_max": details[key]["cap_max"],
+                    "reception_start": details[key]["reception_start"],
+                    "remain": adp.get("remainNumber"), "available": bool(st.get("isAvailable")),
+                    "room_available": bool(st.get("isRoomAvailable")), "accept": bool(st.get("isAcceptDate")),
+                    "price": adp.get("totalPrice"),
+                })
+        dates[d] = rows
+    return {"dates": dates}
+
+
+def summarize_liberty(info: dict, today: str) -> tuple[dict[str, dict[str, str]], str, str, list[str]]:
+    """把 Liberty 資料轉成格子符號與狀態。回傳 (cells, status, note, per_date_lines)"""
+    cells: dict[str, dict[str, str]] = {}
+    lines: list[str] = []
+    any_avail = False
+    any_stock = False
+    receptions: set[str] = set()
+    for d in TARGET_DATES:
+        rows = info["dates"].get(d, [])
+        cells[d] = {}
+        if not rows:
+            for nz in PARTY_SIZES:
+                cells[d][str(nz)] = "※"
+            lines.append(f"{d[5:].replace('-', '/')}：系統尚無此日資料（未開賣）")
+            continue
+        for nz in PARTY_SIZES:
+            fit = [r for r in rows if (r["cap_max"] or 0) >= nz and (r["cap_min"] or 0) <= nz]
+            if not fit:
+                cells[d][str(nz)] = "—"
+            elif any(r["available"] for r in fit):
+                cells[d][str(nz)] = "○"; any_avail = True
+            elif any((r["remain"] or 0) > 0 and r["room_available"] for r in fit):
+                cells[d][str(nz)] = "※"; any_stock = True   # 有庫存但受付開始日未到
+            else:
+                cells[d][str(nz)] = "×"
+        by_room: dict[str, dict] = {}
+        for r in rows:
+            cur = by_room.get(r["room"])
+            if cur is None or r["available"] or ((r["remain"] or 0) > (cur["remain"] or 0) and r["room_available"]):
+                by_room[r["room"]] = r
+            if (r["remain"] or 0) > 0 and r["room_available"] and r["reception_start"]:
+                receptions.add(str(r["reception_start"]))
+        parts = []
+        for name, r in by_room.items():
+            short = re.sub(r"【[^】]*】", "", name)
+            short = re.split(r"[＜（＋]", short)[0].replace("New", "").strip()[:12]
+            if r["available"]:
+                tag = f"可訂 {r['remain'] or ''}".strip()
+            elif (r["remain"] or 0) > 0 and r["room_available"]:
+                tag = f"在庫{r['remain']}"
+            else:
+                tag = "無"
+            cap = f"{r['cap_min']}–{r['cap_max']}人" if r["cap_max"] else ""
+            parts.append(f"{short}{'（' + cap + '）' if cap else ''} {tag}")
+        lines.append(f"{d[5:].replace('-', '/')}：" + "、".join(parts))
+    rec_txt = ""
+    if receptions:
+        rec_txt = "受付開始 " + "、".join(f"{r[:4]}/{int(r[4:6])}/{int(r[6:])}" for r in sorted(receptions))
+    if any_avail:
+        return cells, "available", "官網系統顯示可訂，立刻去訂", lines
+    if any_stock:
+        future = [r for r in receptions if r > today.replace("-", "")]
+        if future:
+            return cells, "closed", f"各房型有庫存但尚未受理（{rec_txt}）", lines
+        return cells, "unknown", f"有庫存但系統標示不可訂（{rec_txt or '受付日不明'}）", lines
+    if any(info["dates"].get(d) for d in TARGET_DATES):
+        return cells, "full", "官網系統各房型皆無庫存", lines
+    return cells, "closed", "系統尚無目標日期資料（未開賣）", lines
+
+
 # ── 推論 ────────────────────────────────────────────────────────────────────
 def find_closed_boundary(horizon: dict[str, str]) -> str | None:
     """找出「受付期間外」真正開始的日期。
@@ -217,9 +342,17 @@ def collect() -> dict:
                     "horizon_summary": summarize_horizon(horizon),
                 })
             elif h["engine"] == "shouwakan":
-                info = fetch_shouwakan()
-                status, note = infer_shouwakan(info)
-                entry.update({"cells": {}, "status": status, "status_note": note, "shouwakan": info})
+                news = {}
+                try:
+                    news = fetch_shouwakan()
+                except Exception as e:  # 官網公告只是輔助
+                    entry["errors"].append(f"news: {e}")
+                lib = fetch_shouwakan_liberty()
+                cells, status, note, lines = summarize_liberty(lib, now.date().isoformat())
+                if news.get("sales_until"):
+                    note += f"；官網公告販售至 {news['sales_until'][5:].replace('-', '/')}"
+                entry.update({"cells": cells, "status": status, "status_note": note,
+                              "liberty_lines": lines, "shouwakan": news, "liberty": lib})
             else:
                 entry.update({"cells": {}, "status": "n/a", "status_note": "不在共用引擎上，需另查"})
         except Exception as e:  # 單一旅館失敗不影響其他
@@ -293,12 +426,20 @@ def cell_html(hotel_id: str, d: str, nz: int, sym: str | None) -> str:
     return f"<td class='cell {cls}' title='{esc(title)}'>{sym}</td>"
 
 
+def cell_html_link(sym: str, url: str) -> str:
+    cls = {"○": "ok", "△": "few", "×": "full", "※": "closed", "-": "past"}.get(sym, "na")
+    title = SYMBOL_MEANING.get(sym, "")
+    if sym in ("○", "△") and url:
+        return f"<td class='cell {cls}'><a href='{esc(url)}' target='_blank' rel='noopener' title='{esc(title)}'>{sym}</a></td>"
+    return f"<td class='cell {cls}' title='{esc(title)}'>{sym}</td>"
+
+
 STATUS_LABEL = {
-    "available": ("有空房", "s-ok"),
+    "available": ("有空房・可訂", "s-ok"),
     "full": ("已開放・滿室", "s-full"),
     "closed": ("未開放", "s-closed"),
     "partial": ("部分已開放", "s-partial"),
-    "opened": ("已開賣（另系統）", "s-other"),
+    "opened": ("已開賣", "s-ok"),
     "unknown": ("無法判斷", "s-unknown"),
     "n/a": ("不在引擎上", "s-na"),
     "error": ("抓取失敗", "s-err"),
@@ -314,7 +455,7 @@ def render(state: dict, history: list[dict]) -> tuple[str, str]:
 
     counts = {"available": 0, "full": 0, "closed": 0, "unknown": 0}
     for hid, e in state["hotels"].items():
-        st = "full" if e.get("status") == "partial" else e.get("status")
+        st = {"partial": "full", "opened": "available"}.get(e.get("status"), e.get("status"))
         if st in counts:
             counts[st] += 1
 
@@ -329,10 +470,12 @@ def render(state: dict, history: list[dict]) -> tuple[str, str]:
         for d in TARGET_DATES:
             for nz in PARTY_SIZES:
                 sym = (e.get("cells") or {}).get(d, {}).get(str(nz))
-                if h["engine"] != "njy":
-                    cells += "<td class='cell na'>—</td>"
-                else:
+                if h["engine"] == "njy":
                     cells += cell_html(h["id"], d, nz, sym)
+                elif h["engine"] == "shouwakan" and sym:
+                    cells += cell_html_link(sym, h.get("booking_url", ""))
+                else:
+                    cells += "<td class='cell na'>—</td>"
         horizon_txt = ""
         if e.get("status") in ("closed", "full", "partial") and e.get("horizon_last_open"):
             horizon_txt = f"目前開放至：{fmt_date(e['horizon_last_open'])}"
@@ -346,7 +489,9 @@ def render(state: dict, history: list[dict]) -> tuple[str, str]:
           <td class='status'>
             <span class='pill {scls}'>{esc(label)}</span>
             <span class='note'>{esc(e.get('status_note', ''))}</span>
+            {''.join(f"<span class='note dim'>{esc(x)}</span>" for x in e.get('liberty_lines', []))}
             {f"<span class='note dim'>{esc(horizon_txt)}</span>" if horizon_txt else ""}
+            {f"<a class='cta' href='{esc(link)}' target='_blank' rel='noopener'>去官網系統訂房 ↗</a>" if e.get('status') in ('available', 'opened') else ""}
             <span class='note dim'>開放規則：{esc(h.get('open_rule', ''))}</span>
           </td>
           {cells}
@@ -391,12 +536,12 @@ def render(state: dict, history: list[dict]) -> tuple[str, str]:
     </div>
     <dl class="gen">
       <div><dt>最後更新</dt><dd>{esc(gen_str)}</dd></div>
-      <div><dt>資料來源</dt><dd>共用預約引擎 nj-yoyaku.net 月曆、昭和館官網公告</dd></div>
+      <div><dt>資料來源</dt><dd>共用預約引擎 nj-yoyaku.net 月曆、昭和館 Liberty 訂房系統 API 與官網公告</dd></div>
     </dl>
   </header>
 
   <section class="summary" aria-label="摘要">
-    <div class="stat s-ok"><span class="n">{counts['available']}</span><span class="l">間有空房</span></div>
+    <div class="stat s-ok"><span class="n">{counts['available']}</span><span class="l">間可訂／已開賣</span></div>
     <div class="stat s-full"><span class="n">{counts['full']}</span><span class="l">間已開放（全部或部分日期）・滿室</span></div>
     <div class="stat s-closed"><span class="n">{counts['closed']}</span><span class="l">間尚未開放</span></div>
     <div class="stat s-unknown"><span class="n">{counts['unknown']}</span><span class="l">間無法判斷</span></div>
@@ -423,8 +568,8 @@ def render(state: dict, history: list[dict]) -> tuple[str, str]:
       <li><span class="sym ok">○</span>有空房，點格子直達該日訂房頁</li>
       <li><span class="sym few">△</span>少量空房，可能只剩一間</li>
       <li><span class="sym full">×</span>滿室，<em>或</em>尚未開放預約。引擎用同一符號，無法區分</li>
-      <li><span class="sym closed">※</span>受付期間外，可確定尚未開放</li>
-      <li><span class="sym na">—</span>此旅館不在共用引擎上，或無此人數選項</li>
+      <li><span class="sym closed">※</span>受付期間外，可確定尚未開放。昭和館的 ※ 表示系統有庫存但受付開始日未到</li>
+      <li><span class="sym na">—</span>此旅館不在任何可讀取的系統上，或無符合人數的房型</li>
     </ul>
     <p class="fine">「開放狀態」是腳本的推論：目標日期為 × 且 ※ 從某日起連續到 5 月底（容許少數孤立雜訊日），判為「已開放・滿室」；零星或之後又恢復 × 的 ※ 視為休館日，不算邊界；目標日期本身為 ※ 判為「未開放」；2–5 月全為 × 則無法判斷，請對照該旅館的開放規則。引擎不顯示剩餘間數，兩人房 × 2 需在出現 ○ 或 △ 後人工至訂房頁確認。</p>
   </section>
@@ -521,6 +666,11 @@ td.cell.ok{background:var(--ok-bg)} td.cell.ok a{color:var(--ok)}
 td.cell a{display:inline-block;padding:2px 8px;border-radius:4px;text-decoration:none}
 td.cell a:hover{outline:2px solid currentColor}
 tr.s-ok .hname{color:var(--ok)}
+tr.s-ok th,tr.s-ok td{background:var(--ok-bg)}
+tr.s-ok td.cell{background:transparent}
+.pill.s-ok{font-size:12.5px;padding:3px 10px}
+.cta{display:inline-block;margin-top:8px;font-size:12.5px;font-weight:700;color:#fff;background:var(--ok);padding:6px 12px;border-radius:4px;text-decoration:none}
+.cta:hover{text-decoration:none;filter:brightness(1.08)}
 .legend,.changes{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:18px 20px;box-shadow:var(--shadow)}
 h2{font-family:var(--serif);font-size:16px;margin:0 0 10px;font-weight:700}
 .legend ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:6px 20px;font-size:13px}
