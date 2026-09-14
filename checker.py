@@ -126,28 +126,58 @@ def find_closed_boundary(horizon: dict[str, str]) -> str | None:
 
 def infer_status(cells: dict[str, dict[str, str]], horizon: dict[str, str]) -> tuple[str, str]:
     """cells: {date: {'2': sym, '4': sym}}; horizon: {date: sym} (NZ=0, 2–5 月)
-    回傳 (狀態代碼, 說明)"""
-    target_syms = {s for d in TARGET_DATES for s in cells.get(d, {}).values()}
-    if target_syms & {"○", "△"}:
-        return "available", "有空房"
-    if target_syms and target_syms <= {"※"}:
-        return "closed", "受付期間外（尚未開放）"
+    逐日判斷後彙總，回傳 (狀態代碼, 說明)。"""
     boundary = find_closed_boundary(horizon)
-    if boundary and boundary > TARGET_DATES[-1]:
-        return "full", f"已開放・滿室（{boundary[5:].replace('-', '/')} 起為受付期間外）"
-    sporadic = sorted(d for d, s in horizon.items() if s == "※")
-    if sporadic:
-        return "unknown", f"無法判斷（目標日皆 ×；3–5 月有 {len(sporadic)} 天 ※，疑為休館日而非預約邊界）"
-    return "unknown", "無法判斷（滿室或未開放，2–5 月符號皆為 ×）"
+    per_day: dict[str, str] = {}
+    for d in TARGET_DATES:
+        syms = set(cells.get(d, {}).values())
+        if syms & {"○", "△"}:
+            per_day[d] = "available"
+        elif syms and syms <= {"※"}:
+            per_day[d] = "closed"
+        elif boundary and d < boundary:
+            per_day[d] = "full"          # 已開放（邊界之前）但全 ×
+        else:
+            per_day[d] = "unknown"
+    def days(state: str) -> str:
+        return "、".join(d[5:].replace("-", "/") for d, v in per_day.items() if v == state)
+    states = set(per_day.values())
+    if "available" in states:
+        return "available", f"有空房：{days('available')}"
+    parts = []
+    if "full" in states:
+        parts.append(f"{days('full')} 已開放・滿室")
+    if "closed" in states:
+        parts.append(f"{days('closed')} 尚未開放")
+    if "unknown" in states:
+        parts.append(f"{days('unknown')} 無法判斷")
+    note = "；".join(parts)
+    if boundary:
+        note += f"（{boundary[5:].replace('-', '/')} 起為受付期間外）"
+    elif "unknown" in states:
+        sporadic = sum(1 for v in horizon.values() if v == "※")
+        note += f"（3–5 月有 {sporadic} 天 ※，疑為休館日）" if sporadic else "（2–5 月符號皆為 ×）"
+    if states == {"full"}:
+        return "full", note
+    if states == {"closed"}:
+        return "closed", note
+    if "full" in states or "closed" in states:
+        return "partial", note
+    return "unknown", note
 
 
 def infer_shouwakan(info: dict) -> tuple[str, str]:
     su = info.get("sales_until")
     if not su:
         return "unknown", "官網未找到販售公告"
-    if su >= TARGET_DATES[-1]:
-        return "opened", f"官網公告販售至 {su[5:].replace('-', '/')}，已涵蓋目標日期，請至官網系統查空房"
-    return "closed", f"官網公告販售至 {su[5:].replace('-', '/')}，尚未涵蓋目標日期"
+    label = su[5:].replace("-", "/")
+    covered = [d for d in TARGET_DATES if d <= su]
+    if len(covered) == len(TARGET_DATES):
+        return "opened", f"官網公告販售至 {label}，已涵蓋全部目標日期，請至官網系統查空房"
+    if covered:
+        cov = "、".join(d[5:].replace("-", "/") for d in covered)
+        return "opened", f"官網公告販售至 {label}，已涵蓋 {cov}，請至官網系統查空房"
+    return "closed", f"官網公告販售至 {label}，尚未涵蓋目標日期"
 
 
 # ── 主流程 ──────────────────────────────────────────────────────────────────
@@ -267,6 +297,7 @@ STATUS_LABEL = {
     "available": ("有空房", "s-ok"),
     "full": ("已開放・滿室", "s-full"),
     "closed": ("未開放", "s-closed"),
+    "partial": ("部分已開放", "s-partial"),
     "opened": ("已開賣（另系統）", "s-other"),
     "unknown": ("無法判斷", "s-unknown"),
     "n/a": ("不在引擎上", "s-na"),
@@ -283,8 +314,9 @@ def render(state: dict, history: list[dict]) -> tuple[str, str]:
 
     counts = {"available": 0, "full": 0, "closed": 0, "unknown": 0}
     for hid, e in state["hotels"].items():
-        if e.get("status") in counts:
-            counts[e["status"]] += 1
+        st = "full" if e.get("status") == "partial" else e.get("status")
+        if st in counts:
+            counts[st] += 1
 
     rows = []
     for h in hotels:
@@ -302,7 +334,7 @@ def render(state: dict, history: list[dict]) -> tuple[str, str]:
                 else:
                     cells += cell_html(h["id"], d, nz, sym)
         horizon_txt = ""
-        if e.get("status") in ("closed", "full") and e.get("horizon_last_open"):
+        if e.get("status") in ("closed", "full", "partial") and e.get("horizon_last_open"):
             horizon_txt = f"目前開放至：{fmt_date(e['horizon_last_open'])}"
         link = h.get("booking_url") or (f"{ENGINE}/{h['id']}/plan.aspx?PID=-1" if h["engine"] == "njy" else h["official"])
         rows.append(f"""
@@ -365,7 +397,7 @@ def render(state: dict, history: list[dict]) -> tuple[str, str]:
 
   <section class="summary" aria-label="摘要">
     <div class="stat s-ok"><span class="n">{counts['available']}</span><span class="l">間有空房</span></div>
-    <div class="stat s-full"><span class="n">{counts['full']}</span><span class="l">間已開放・滿室</span></div>
+    <div class="stat s-full"><span class="n">{counts['full']}</span><span class="l">間已開放（全部或部分日期）・滿室</span></div>
     <div class="stat s-closed"><span class="n">{counts['closed']}</span><span class="l">間尚未開放</span></div>
     <div class="stat s-unknown"><span class="n">{counts['unknown']}</span><span class="l">間無法判斷</span></div>
   </section>
@@ -416,7 +448,7 @@ CSS = """
   --bg:#f3f5f8; --panel:#ffffff; --line:#d9dee5; --ink:#1c2229; --muted:#6a737d; --dim:#98a1ab;
   --accent:#3b5480; --accent-ink:#2b4066;
   --ok:#2a7a5a; --ok-bg:#e3f2ea; --few:#b96d12; --few-bg:#fbeedc; --full:#8a9099; --full-bg:transparent;
-  --closed:#aab1ba; --closed-bg:#f0f2f5; --err:#a33a3a;
+  --closed:#aab1ba; --closed-bg:#f0f2f5; --err:#a33a3a; --accent-bg:#e8edf6;
   --shadow:0 1px 2px rgba(20,30,45,.06),0 6px 20px -12px rgba(20,30,45,.18);
   --serif:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
   --sans:"Noto Sans JP","Hiragino Sans","PingFang TC",system-ui,sans-serif;
@@ -427,7 +459,7 @@ CSS = """
     --bg:#131920; --panel:#1b232c; --line:#2b3540; --ink:#e7ebef; --muted:#a2acb6; --dim:#6f7a86;
     --accent:#8fb0e6; --accent-ink:#b4cbf0;
     --ok:#6fd2a3; --ok-bg:#183327; --few:#f0b35a; --few-bg:#3a2a12; --full:#6b7580;
-    --closed:#5a6570; --closed-bg:#1f2830; --err:#e07a7a;
+    --closed:#5a6570; --closed-bg:#1f2830; --err:#e07a7a; --accent-bg:#1f2b3d;
     --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -14px rgba(0,0,0,.6);
   }
 }
@@ -473,6 +505,7 @@ table.grid{border-collapse:separate;border-spacing:0;width:100%;min-width:900px}
 .pill{display:inline-block;font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--muted);letter-spacing:.02em}
 .pill.s-ok{color:var(--ok);background:var(--ok-bg);border-color:transparent}
 .pill.s-closed{color:var(--muted);background:var(--closed-bg)}
+.pill.s-partial{color:var(--accent-ink);background:var(--accent-bg,var(--bg))}
 .pill.s-other{color:var(--accent-ink);background:var(--bg)}
 .pill.s-unknown{color:var(--few);background:var(--few-bg);border-color:transparent}
 .pill.s-err{color:var(--err)}

@@ -12,7 +12,7 @@
   --bg:#f3f5f8; --panel:#ffffff; --line:#d9dee5; --ink:#1c2229; --muted:#6a737d; --dim:#98a1ab;
   --accent:#3b5480; --accent-ink:#2b4066;
   --ok:#2a7a5a; --ok-bg:#e3f2ea; --few:#b96d12; --few-bg:#fbeedc; --full:#8a9099; --full-bg:transparent;
-  --closed:#aab1ba; --closed-bg:#f0f2f5; --err:#a33a3a;
+  --closed:#aab1ba; --closed-bg:#f0f2f5; --err:#a33a3a; --accent-bg:#e8edf6;
   --shadow:0 1px 2px rgba(20,30,45,.06),0 6px 20px -12px rgba(20,30,45,.18);
   --serif:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
   --sans:"Noto Sans JP","Hiragino Sans","PingFang TC",system-ui,sans-serif;
@@ -23,7 +23,7 @@
     --bg:#131920; --panel:#1b232c; --line:#2b3540; --ink:#e7ebef; --muted:#a2acb6; --dim:#6f7a86;
     --accent:#8fb0e6; --accent-ink:#b4cbf0;
     --ok:#6fd2a3; --ok-bg:#183327; --few:#f0b35a; --few-bg:#3a2a12; --full:#6b7580;
-    --closed:#5a6570; --closed-bg:#1f2830; --err:#e07a7a;
+    --closed:#5a6570; --closed-bg:#1f2830; --err:#e07a7a; --accent-bg:#1f2b3d;
     --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -14px rgba(0,0,0,.6);
   }
 }
@@ -69,6 +69,7 @@ table.grid{border-collapse:separate;border-spacing:0;width:100%;min-width:900px}
 .pill{display:inline-block;font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--muted);letter-spacing:.02em}
 .pill.s-ok{color:var(--ok);background:var(--ok-bg);border-color:transparent}
 .pill.s-closed{color:var(--muted);background:var(--closed-bg)}
+.pill.s-partial{color:var(--accent-ink);background:var(--accent-bg,var(--bg))}
 .pill.s-other{color:var(--accent-ink);background:var(--bg)}
 .pill.s-unknown{color:var(--few);background:var(--few-bg);border-color:transparent}
 .pill.s-err{color:var(--err)}
@@ -111,15 +112,15 @@ h2{font-family:var(--serif);font-size:16px;margin:0 0 10px;font-weight:700}
       <h1>2027 年 2 月 10 – 12 日<br>四人房一間，或兩人房兩間</h1>
     </div>
     <dl class="gen">
-      <div><dt>最後更新</dt><dd>2026/09/12 22:00 JST</dd></div>
+      <div><dt>最後更新</dt><dd>2026/09/14 14:37 JST</dd></div>
       <div><dt>資料來源</dt><dd>共用預約引擎 nj-yoyaku.net 月曆、昭和館官網公告</dd></div>
     </dl>
   </header>
 
   <section class="summary" aria-label="摘要">
     <div class="stat s-ok"><span class="n">0</span><span class="l">間有空房</span></div>
-    <div class="stat s-full"><span class="n">0</span><span class="l">間已開放・滿室</span></div>
-    <div class="stat s-closed"><span class="n">2</span><span class="l">間尚未開放</span></div>
+    <div class="stat s-full"><span class="n">1</span><span class="l">間已開放（全部或部分日期）・滿室</span></div>
+    <div class="stat s-closed"><span class="n">0</span><span class="l">間尚未開放</span></div>
     <div class="stat s-unknown"><span class="n">10</span><span class="l">間無法判斷</span></div>
   </section>
 
@@ -141,7 +142,7 @@ h2{font-family:var(--serif);font-size:16px;margin:0 0 10px;font-weight:700}
           </th>
           <td class='status'>
             <span class='pill s-unknown'>無法判斷</span>
-            <span class='note'>無法判斷（目標日皆 ×；3–5 月有 14 天 ※，疑為休館日而非預約邊界）</span>
+            <span class='note'>02/10、02/11、02/12 無法判斷（3–5 月有 13 天 ※，疑為休館日）</span>
             
             <span class='note dim'>開放規則：每月 1 日開放 5 個月後（部落格整理，未驗證）</span>
           </td>
@@ -154,7 +155,7 @@ h2{font-family:var(--serif);font-size:16px;margin:0 0 10px;font-weight:700}
           </th>
           <td class='status'>
             <span class='pill s-unknown'>無法判斷</span>
-            <span class='note'>無法判斷（滿室或未開放，2–5 月符號皆為 ×）</span>
+            <span class='note'>02/10、02/11、02/12 無法判斷（2–5 月符號皆為 ×）</span>
             
             <span class='note dim'>開放規則：每月 1 日開放 5 個月後（部落格整理，未驗證）</span>
           </td>
@@ -167,7 +168,7 @@ h2{font-family:var(--serif);font-size:16px;margin:0 0 10px;font-weight:700}
           </th>
           <td class='status'>
             <span class='pill s-unknown'>無法判斷</span>
-            <span class='note'>無法判斷（目標日皆 ×；3–5 月有 19 天 ※，疑為休館日而非預約邊界）</span>
+            <span class='note'>02/10、02/11、02/12 無法判斷（3–5 月有 18 天 ※，疑為休館日）</span>
             
             <span class='note dim'>開放規則：每月 1 日開放 5 個月後（部落格整理，未驗證）</span>
           </td>
@@ -180,7 +181,7 @@ h2{font-family:var(--serif);font-size:16px;margin:0 0 10px;font-weight:700}
           </th>
           <td class='status'>
             <span class='pill s-unknown'>無法判斷</span>
-            <span class='note'>無法判斷（目標日皆 ×；3–5 月有 25 天 ※，疑為休館日而非預約邊界）</span>
+            <span class='note'>02/10、02/11、02/12 無法判斷（3–5 月有 26 天 ※，疑為休館日）</span>
             
             <span class='note dim'>開放規則：6 個月以上前（部落格整理，未驗證）</span>
           </td>
@@ -193,20 +194,20 @@ h2{font-family:var(--serif);font-size:16px;margin:0 0 10px;font-weight:700}
           </th>
           <td class='status'>
             <span class='pill s-unknown'>無法判斷</span>
-            <span class='note'>無法判斷（滿室或未開放，2–5 月符號皆為 ×）</span>
+            <span class='note'>02/10、02/11、02/12 無法判斷（2–5 月符號皆為 ×）</span>
             
             <span class='note dim'>開放規則：約 6 個月前（部落格整理，未驗證）</span>
           </td>
           <td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td>
         </tr>
-        <tr class='s-closed'>
+        <tr class='s-other'>
           <th scope='row' class='hotel'>
             <a class='hname' href='https://site.reservation.liberty-service.com/cc5f559e549f4f2fac443b9673014a37/facility-db690034-b45f-46b5-84d1-3f8ba4b8f522/search' target='_blank' rel='noopener'>味とまごころの宿 昭和館</a>
             <span class='meta'><span class='cap-ok'>最多 4 人</span> · <a href='http://www.shouwakan.net/' target='_blank' rel='noopener'>官網</a> · 0237-28-2151</span>
           </th>
           <td class='status'>
-            <span class='pill s-closed'>未開放</span>
-            <span class='note'>官網公告販售至 01/13，尚未涵蓋目標日期</span>
+            <span class='pill s-other'>已開賣（另系統）</span>
+            <span class='note'>官網公告販售至 02/11，已涵蓋 02/10、02/11，請至官網系統查空房</span>
             
             <span class='note dim'>開放規則：分批開賣，於官網 NEWS 公告「○月○日までの販売を開始」；2026/07/02 起改用 Liberty 訂房系統，共用引擎頁面疑似廢棄</span>
           </td>
@@ -219,7 +220,7 @@ h2{font-family:var(--serif);font-size:16px;margin:0 0 10px;font-weight:700}
           </th>
           <td class='status'>
             <span class='pill s-unknown'>無法判斷</span>
-            <span class='note'>無法判斷（滿室或未開放，2–5 月符號皆為 ×）</span>
+            <span class='note'>02/10、02/11、02/12 無法判斷（2–5 月符號皆為 ×）</span>
             
             <span class='note dim'>開放規則：每月 1 日 09:00 開放 3 個月後，電話優先（官網明載）</span>
           </td>
@@ -232,7 +233,7 @@ h2{font-family:var(--serif);font-size:16px;margin:0 0 10px;font-weight:700}
           </th>
           <td class='status'>
             <span class='pill s-unknown'>無法判斷</span>
-            <span class='note'>無法判斷（滿室或未開放，2–5 月符號皆為 ×）</span>
+            <span class='note'>02/10、02/11、02/12 無法判斷（2–5 月符號皆為 ×）</span>
             
             <span class='note dim'>開放規則：不定期（部落格整理，未驗證）</span>
           </td>
@@ -245,24 +246,24 @@ h2{font-family:var(--serif);font-size:16px;margin:0 0 10px;font-weight:700}
           </th>
           <td class='status'>
             <span class='pill s-unknown'>無法判斷</span>
-            <span class='note'>無法判斷（滿室或未開放，2–5 月符號皆為 ×）</span>
+            <span class='note'>02/10、02/11、02/12 無法判斷（2–5 月符號皆為 ×）</span>
             
             <span class='note dim'>開放規則：需向旅館確認（部落格整理，未驗證）</span>
           </td>
           <td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td>
         </tr>
-        <tr class='s-closed'>
+        <tr class='s-partial'>
           <th scope='row' class='hotel'>
             <a class='hname' href='https://www.nj-yoyaku.net/fujiya/plan.aspx?PID=-1' target='_blank' rel='noopener'>藤屋</a>
             <span class='meta'><span class='cap-low'>最多 3 人</span> · <a href='https://www.fujiya-ginzan.com/' target='_blank' rel='noopener'>官網</a> · 0237-28-2141</span>
           </th>
           <td class='status'>
-            <span class='pill s-closed'>未開放</span>
-            <span class='note'>受付期間外（尚未開放）</span>
-            <span class='note dim'>目前開放至：2/9（火）</span>
+            <span class='pill s-partial'>部分已開放</span>
+            <span class='note'>02/10、02/11 已開放・滿室；02/12 尚未開放（02/12 起為受付期間外）</span>
+            <span class='note dim'>目前開放至：2/11（木）</span>
             <span class='note dim'>開放規則：入住日 150 天前 00:00（部落格整理，未驗證）</span>
           </td>
-          <td class='cell closed' title='受付期間外'>※</td><td class='cell closed' title='受付期間外'>※</td><td class='cell closed' title='受付期間外'>※</td><td class='cell closed' title='受付期間外'>※</td><td class='cell closed' title='受付期間外'>※</td><td class='cell closed' title='受付期間外'>※</td>
+          <td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell full' title='滿室或未開放'>×</td><td class='cell closed' title='受付期間外'>※</td><td class='cell closed' title='受付期間外'>※</td>
         </tr>
         <tr class='s-unknown'>
           <th scope='row' class='hotel'>
@@ -271,7 +272,7 @@ h2{font-family:var(--serif);font-size:16px;margin:0 0 10px;font-weight:700}
           </th>
           <td class='status'>
             <span class='pill s-unknown'>無法判斷</span>
-            <span class='note'>無法判斷（滿室或未開放，2–5 月符號皆為 ×）</span>
+            <span class='note'>02/10、02/11、02/12 無法判斷（2–5 月符號皆為 ×）</span>
             
             <span class='note dim'>開放規則：入住月 3 個月前的月初（部落格整理，未驗證）；引擎上目前無房型資料</span>
           </td>
@@ -284,7 +285,7 @@ h2{font-family:var(--serif);font-size:16px;margin:0 0 10px;font-weight:700}
           </th>
           <td class='status'>
             <span class='pill s-unknown'>無法判斷</span>
-            <span class='note'>無法判斷（滿室或未開放，2–5 月符號皆為 ×）</span>
+            <span class='note'>02/10、02/11、02/12 無法判斷（2–5 月符號皆為 ×）</span>
             
             <span class='note dim'>開放規則：每月 1 日開放 3 個月後（部落格整理，未驗證）</span>
           </td>
@@ -321,7 +322,7 @@ h2{font-family:var(--serif);font-size:16px;margin:0 0 10px;font-weight:700}
 
   <section class="changes">
     <h2>最近變化</h2>
-    <p class='empty'>尚無變化紀錄。腳本每次執行都會與上一次比對，任何格子的符號改變都會列在這裡。</p>
+    <ul class='hist'><li><span class='ts'>09/14 14:37</span> <b>藤屋</b> 狀態 <span class='chg'>無法判斷（目標日皆 ×；3–5 月有 107 天 ※，疑為休館日而非預約邊界） → 02/10、02/11 已開放・滿室；02/12 尚未開放（02/12 起為受付期間外）</span></li><li><span class='ts'>09/14 14:37</span> <b>味とまごころの宿 昭和館</b> 狀態 <span class='chg'>官網公告販售至 02/11，尚未涵蓋目標日期 → 官網公告販售至 02/11，已涵蓋 02/10、02/11，請至官網系統查空房</span></li><li><span class='ts'>09/14 14:34</span> <b>藤屋</b> 狀態 <span class='chg'>受付期間外（尚未開放） → 無法判斷（目標日皆 ×；3–5 月有 107 天 ※，疑為休館日而非預約邊界）</span></li><li><span class='ts'>09/14 14:34</span> <b>藤屋</b> 2/11（木） 4人 <span class='chg'>※ → ×</span></li><li><span class='ts'>09/14 14:34</span> <b>藤屋</b> 2/11（木） 2人 <span class='chg'>※ → ×</span></li><li><span class='ts'>09/14 14:34</span> <b>藤屋</b> 2/10（水） 4人 <span class='chg'>※ → ×</span></li><li><span class='ts'>09/14 14:34</span> <b>藤屋</b> 2/10（水） 2人 <span class='chg'>※ → ×</span></li></ul>
   </section>
 
   <footer class="foot">

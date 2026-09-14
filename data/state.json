@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-14T14:34:46+09:00",
+ "generated_at": "2026-09-14T14:37:05+09:00",
  "hotels": {
   "ginzanso": {
    "errors": [],
@@ -18,7 +18,7 @@
     }
    },
    "status": "unknown",
-   "status_note": "無法判斷（目標日皆 ×；3–5 月有 13 天 ※，疑為休館日而非預約邊界）",
+   "status_note": "02/10、02/11、02/12 無法判斷（3–5 月有 13 天 ※，疑為休館日）",
    "closed_boundary": null,
    "horizon_last_open": null,
    "horizon_summary": [
@@ -67,7 +67,7 @@
     }
    },
    "status": "unknown",
-   "status_note": "無法判斷（滿室或未開放，2–5 月符號皆為 ×）",
+   "status_note": "02/10、02/11、02/12 無法判斷（2–5 月符號皆為 ×）",
    "closed_boundary": null,
    "horizon_last_open": null,
    "horizon_summary": [
@@ -114,7 +114,7 @@
     }
    },
    "status": "unknown",
-   "status_note": "無法判斷（目標日皆 ×；3–5 月有 19 天 ※，疑為休館日而非預約邊界）",
+   "status_note": "02/10、02/11、02/12 無法判斷（3–5 月有 18 天 ※，疑為休館日）",
    "closed_boundary": null,
    "horizon_last_open": null,
    "horizon_summary": [
@@ -127,8 +127,8 @@
     {
      "month": "2027-03",
      "counts": {
-      "×": 12,
-      "※": 19
+      "×": 13,
+      "※": 18
      }
     },
     {
@@ -162,7 +162,7 @@
     }
    },
    "status": "unknown",
-   "status_note": "無法判斷（目標日皆 ×；3–5 月有 26 天 ※，疑為休館日而非預約邊界）",
+   "status_note": "02/10、02/11、02/12 無法判斷（3–5 月有 26 天 ※，疑為休館日）",
    "closed_boundary": null,
    "horizon_last_open": null,
    "horizon_summary": [
@@ -210,7 +210,7 @@
     }
    },
    "status": "unknown",
-   "status_note": "無法判斷（滿室或未開放，2–5 月符號皆為 ×）",
+   "status_note": "02/10、02/11、02/12 無法判斷（2–5 月符號皆為 ×）",
    "closed_boundary": null,
    "horizon_last_open": null,
    "horizon_summary": [
@@ -243,8 +243,8 @@
   "showakan": {
    "errors": [],
    "cells": {},
-   "status": "closed",
-   "status_note": "官網公告販售至 02/11，尚未涵蓋目標日期",
+   "status": "opened",
+   "status_note": "官網公告販售至 02/11，已涵蓋 02/10、02/11，請至官網系統查空房",
    "shouwakan": {
     "sales_until": "2027-02-11",
     "raw": "2027年2月11日までの販売を開始"
@@ -267,7 +267,7 @@
     }
    },
    "status": "unknown",
-   "status_note": "無法判斷（滿室或未開放，2–5 月符號皆為 ×）",
+   "status_note": "02/10、02/11、02/12 無法判斷（2–5 月符號皆為 ×）",
    "closed_boundary": null,
    "horizon_last_open": null,
    "horizon_summary": [
@@ -314,7 +314,7 @@
     }
    },
    "status": "unknown",
-   "status_note": "無法判斷（滿室或未開放，2–5 月符號皆為 ×）",
+   "status_note": "02/10、02/11、02/12 無法判斷（2–5 月符號皆為 ×）",
    "closed_boundary": null,
    "horizon_last_open": null,
    "horizon_summary": [
@@ -361,7 +361,7 @@
     }
    },
    "status": "unknown",
-   "status_note": "無法判斷（滿室或未開放，2–5 月符號皆為 ×）",
+   "status_note": "02/10、02/11、02/12 無法判斷（2–5 月符號皆為 ×）",
    "closed_boundary": null,
    "horizon_last_open": null,
    "horizon_summary": [
@@ -407,8 +407,8 @@
      "4": "※"
     }
    },
-   "status": "unknown",
-   "status_note": "無法判斷（目標日皆 ×；3–5 月有 107 天 ※，疑為休館日而非預約邊界）",
+   "status": "partial",
+   "status_note": "02/10、02/11 已開放・滿室；02/12 尚未開放（02/12 起為受付期間外）",
    "closed_boundary": "2027-02-12",
    "horizon_last_open": "2027-02-11",
    "horizon_summary": [
@@ -457,7 +457,7 @@
     }
    },
    "status": "unknown",
-   "status_note": "無法判斷（滿室或未開放，2–5 月符號皆為 ×）",
+   "status_note": "02/10、02/11、02/12 無法判斷（2–5 月符號皆為 ×）",
    "closed_boundary": null,
    "horizon_last_open": null,
    "horizon_summary": [
@@ -504,7 +504,7 @@
     }
    },
    "status": "unknown",
-   "status_note": "無法判斷（滿室或未開放，2–5 月符號皆為 ×）",
+   "status_note": "02/10、02/11、02/12 無法判斷（2–5 月符號皆為 ×）",
    "closed_boundary": null,
    "horizon_last_open": null,
    "horizon_summary": [
