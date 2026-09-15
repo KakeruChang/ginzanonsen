@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-15T11:32:19+09:00",
+ "generated_at": "2026-09-15T17:11:33+09:00",
  "hotels": {
   "ginzanso": {
    "errors": [],
@@ -244,7 +244,7 @@
    "errors": [],
    "cells": {
     "2027-02-10": {
-     "2": "※",
+     "2": "×",
      "4": "×"
     },
     "2027-02-11": {
@@ -256,10 +256,10 @@
      "4": "※"
     }
    },
-   "status": "closed",
-   "status_note": "各房型有庫存但尚未受理（受付開始 2026/12/1）；官網公告販售至 02/11",
+   "status": "full",
+   "status_note": "官網系統各房型皆無庫存；官網公告販售至 02/11",
    "liberty_lines": [
-    "02/10：デラックスツイン（2–2人） 在庫2、シングルルーム（1–1人） 在庫3",
+    "02/10：シングルルーム（1–1人） 在庫3",
     "02/11：シングルルーム（1–1人） 在庫2",
     "02/12：系統尚無此日資料（未開賣）"
    ],
@@ -271,20 +271,6 @@
     "dates": {
      "2027-02-10": [
       {
-       "plan_id": 85679,
-       "plan": "◆オフィシャル事前決済【旬旅♪】白銀の温泉街と大正ロマン♪季節を味わう冬の恵み会席☆[禁煙]☆［1泊2食付］",
-       "room_id": 622,
-       "room": "New【静かな山側】デラックスツイン＜広さ約24.5㎡＞洋室ベッド",
-       "cap_min": 2,
-       "cap_max": 2,
-       "reception_start": 20261201,
-       "remain": 2,
-       "available": false,
-       "room_available": true,
-       "accept": true,
-       "price": null
-      },
-      {
        "plan_id": 85681,
        "plan": "◆オフィシャル事前決済【ひとりで快適♪】冬の銀山温泉を心ゆくまで。シングルルーム☆［禁煙］☆［1泊2食付］",
        "room_id": 621,
@@ -295,20 +281,6 @@
        "remain": 3,
        "available": false,
        "room_available": true,
-       "accept": true,
-       "price": null
-      },
-      {
-       "plan_id": 829,
-       "plan": "◆【旬旅♪】季節を味わう旬の恵み会席♪大正ロマン漂う街へ…☆[禁煙]☆［1泊2食付］",
-       "room_id": 622,
-       "room": "New【静かな山側】デラックスツイン＜広さ約24.5㎡＞洋室ベッド",
-       "cap_min": 2,
-       "cap_max": 2,
-       "reception_start": 20250918,
-       "remain": 2,
-       "available": false,
-       "room_available": false,
        "accept": true,
        "price": null
       },
