@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-24T08:21:05+09:00",
+ "generated_at": "2026-10-17T14:11:53+09:00",
  "hotels": {
   "ginzanso": {
    "errors": [],
@@ -18,7 +18,7 @@
     }
    },
    "status": "unknown",
-   "status_note": "02/10、02/11、02/12 無法判斷（3–5 月有 32 天 ※，疑為休館日）",
+   "status_note": "02/10、02/11、02/12 無法判斷（3–5 月有 42 天 ※，疑為休館日）",
    "closed_boundary": null,
    "horizon_last_open": null,
    "horizon_summary": [
@@ -31,21 +31,22 @@
     {
      "month": "2027-03",
      "counts": {
-      "×": 21,
-      "※": 10
+      "×": 28,
+      "△": 3
      }
     },
     {
      "month": "2027-04",
      "counts": {
-      "×": 30
+      "×": 2,
+      "※": 28
      }
     },
     {
      "month": "2027-05",
      "counts": {
-      "×": 9,
-      "※": 22
+      "×": 17,
+      "※": 14
      }
     }
    ]
@@ -114,7 +115,7 @@
     }
    },
    "status": "unknown",
-   "status_note": "02/10、02/11、02/12 無法判斷（3–5 月有 17 天 ※，疑為休館日）",
+   "status_note": "02/10、02/11、02/12 無法判斷（3–5 月有 25 天 ※，疑為休館日）",
    "closed_boundary": null,
    "horizon_last_open": null,
    "horizon_summary": [
@@ -127,14 +128,15 @@
     {
      "month": "2027-03",
      "counts": {
-      "×": 14,
-      "※": 17
+      "×": 24,
+      "△": 7
      }
     },
     {
      "month": "2027-04",
      "counts": {
-      "×": 30
+      "×": 5,
+      "※": 25
      }
     },
     {
@@ -162,7 +164,7 @@
     }
    },
    "status": "unknown",
-   "status_note": "02/10、02/11、02/12 無法判斷（3–5 月有 25 天 ※，疑為休館日）",
+   "status_note": "02/10、02/11、02/12 無法判斷（3–5 月有 22 天 ※，疑為休館日）",
    "closed_boundary": null,
    "horizon_last_open": null,
    "horizon_summary": [
@@ -175,8 +177,8 @@
     {
      "month": "2027-03",
      "counts": {
-      "×": 6,
-      "※": 25
+      "×": 9,
+      "※": 22
      }
     },
     {
@@ -253,25 +255,110 @@
     },
     "2027-02-12": {
      "2": "※",
-     "4": "※"
+     "4": "×"
     }
    },
    "status": "closed",
-   "status_note": "系統尚無目標日期資料（未開賣）；官網公告販售至 02/11",
+   "status_note": "各房型有庫存但尚未受理（受付開始 2026/12/1）；官網公告販售至 03/12",
    "liberty_lines": [
     "02/10：系統尚無此日資料（未開賣）",
     "02/11：系統尚無此日資料（未開賣）",
-    "02/12：系統尚無此日資料（未開賣）"
+    "02/12：川側・和室８畳（2–3人） 在庫3、デラックスツイン（2–2人） 在庫2、シングルルーム（1–1人） 在庫3"
    ],
    "shouwakan": {
-    "sales_until": "2027-02-11",
-    "raw": "2027年2月11日までの販売を開始"
+    "sales_until": "2027-03-12",
+    "raw": "2027年3月12日までの販売を開始"
    },
    "liberty": {
     "dates": {
      "2027-02-10": [],
      "2027-02-11": [],
-     "2027-02-12": []
+     "2027-02-12": [
+      {
+       "plan_id": 85679,
+       "plan": "◆オフィシャル事前決済【旬旅♪】白銀の温泉街と大正ロマン♪季節を味わう冬の恵み会席☆[禁煙]☆［1泊2食付］",
+       "room_id": 604,
+       "room": "川側・和室８畳＋屋内ベランダ２畳",
+       "cap_min": 2,
+       "cap_max": 3,
+       "reception_start": 20261201,
+       "remain": 3,
+       "available": false,
+       "room_available": true,
+       "accept": true,
+       "price": null
+      },
+      {
+       "plan_id": 85679,
+       "plan": "◆オフィシャル事前決済【旬旅♪】白銀の温泉街と大正ロマン♪季節を味わう冬の恵み会席☆[禁煙]☆［1泊2食付］",
+       "room_id": 622,
+       "room": "New【静かな山側】デラックスツイン＜広さ約24.5㎡＞洋室ベッド",
+       "cap_min": 2,
+       "cap_max": 2,
+       "reception_start": 20261201,
+       "remain": 2,
+       "available": false,
+       "room_available": true,
+       "accept": true,
+       "price": null
+      },
+      {
+       "plan_id": 85681,
+       "plan": "◆オフィシャル事前決済【ひとりで快適♪】冬の銀山温泉を心ゆくまで。シングルルーム☆［禁煙］☆［1泊2食付］",
+       "room_id": 621,
+       "room": "【静かな山側】シングルルーム＜広さ約14.7㎡＞洋室ベッド",
+       "cap_min": 1,
+       "cap_max": 1,
+       "reception_start": 20261201,
+       "remain": 3,
+       "available": false,
+       "room_available": true,
+       "accept": true,
+       "price": null
+      },
+      {
+       "plan_id": 829,
+       "plan": "◆【旬旅♪】季節を味わう旬の恵み会席♪大正ロマン漂う街へ…☆[禁煙]☆［1泊2食付］",
+       "room_id": 604,
+       "room": "川側・和室８畳＋屋内ベランダ２畳",
+       "cap_min": 2,
+       "cap_max": 3,
+       "reception_start": 20250918,
+       "remain": 3,
+       "available": false,
+       "room_available": false,
+       "accept": true,
+       "price": null
+      },
+      {
+       "plan_id": 829,
+       "plan": "◆【旬旅♪】季節を味わう旬の恵み会席♪大正ロマン漂う街へ…☆[禁煙]☆［1泊2食付］",
+       "room_id": 622,
+       "room": "New【静かな山側】デラックスツイン＜広さ約24.5㎡＞洋室ベッド",
+       "cap_min": 2,
+       "cap_max": 2,
+       "reception_start": 20250918,
+       "remain": 2,
+       "available": false,
+       "room_available": false,
+       "accept": true,
+       "price": null
+      },
+      {
+       "plan_id": 830,
+       "plan": "◆【ひとりで快適♪】銀山温泉を一人でのんびり気ままに満喫！シングルルーム☆［禁煙］☆［1泊2食付］",
+       "room_id": 621,
+       "room": "【静かな山側】シングルルーム＜広さ約14.7㎡＞洋室ベッド",
+       "cap_min": 1,
+       "cap_max": 1,
+       "reception_start": 20250919,
+       "remain": 3,
+       "available": false,
+       "room_available": false,
+       "accept": true,
+       "price": null
+      }
+     ]
     }
    }
   },
@@ -433,22 +520,21 @@
     }
    },
    "status": "full",
-   "status_note": "02/10、02/11、02/12 已開放・滿室（02/22 起為受付期間外）",
-   "closed_boundary": "2027-02-22",
-   "horizon_last_open": "2027-02-21",
+   "status_note": "02/10、02/11、02/12 已開放・滿室（03/16 起為受付期間外）",
+   "closed_boundary": "2027-03-16",
+   "horizon_last_open": "2027-03-15",
    "horizon_summary": [
     {
      "month": "2027-02",
      "counts": {
-      "×": 21,
-      "※": 7
+      "×": 28
      }
     },
     {
      "month": "2027-03",
      "counts": {
-      "※": 29,
-      "×": 2
+      "×": 15,
+      "※": 16
      }
     },
     {
